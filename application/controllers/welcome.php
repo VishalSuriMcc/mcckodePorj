@@ -20,11 +20,19 @@ class Welcome extends CI_Controller {
 	public function index()
 	{
                 $mailChimp = new integratedmailchip();
-                echo '<pre>';
-                    print_r($mailChimp->getAllList());                    
-                echo '</pre>';
+                if(empty($mailChimp->gen_listId)){ 
+                    echo $mailChimp['gen_listId'];                    
+                    echo '<br/>Not-Connected<br/>';
+                }else{                    
+                    //$res = $mailChimp->subscribe('vishalsuri.mcc@gmail.com');
+                    //$res = $mailChimp->getCampaignsDet();
+                    $res = $mailChimp->sendTestingCampaign();
+                    echo '<pre>';
+                        print_r($res);
+                    echo '</pre>';
+                }
 		$this->load->view('welcome_message');
-	}
+	}                
 }
 
 /* End of file welcome.php */
